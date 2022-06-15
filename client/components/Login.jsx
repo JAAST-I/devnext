@@ -1,74 +1,53 @@
-// TODO: STRETCH Feature: Modularize the code to work for Sign up and Login Component
-
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { 
-  Paper,
-  Grid,
-  Avatar,
-  Typography,
-  FormGroup,
-  FormControlLabel,
-  Checkbox,
-  TextField,
-  Button,
-  Link
-} from '@mui/material';
+import React from 'react';
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+import { Avatar, Typography } from '@mui/material';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Link from '@mui/material/Link';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import cover from '../assets/cover.png';
 
-/**
- * Login - Returns Login components
- * @returns {component} Login Component
- */
 export default function Login() {
   const [state, setState] = useState({ username: '', password: '' });
-
-  /** 
-   * navigate - reroutes user to Route passing in State.
-   * @param {string} Route
-   * @param {object} State
-   */
   const navigate = useNavigate();
 
-    //******************* MUI **************************
-    const paperStyle = {
-      padding: 20,
-      height: '60vh',
-      width: 600,
-      margin: '20px auto',
-    };
-    const avatarStyle = { backgroundColor: '#FF6F61' };
-    const btnStyle = { margin: '8px 0' };
-    // ***********************************************
+  const paperStyle = {
+    padding: 20,
+    height: '60vh',
+    width: 600,
+    margin: '20px auto',
+  };
 
-  /**
-   * submitHandler - When login form is submitted, perform a fetch request, and update state.
-   * @param {object} event 
-   */
+  const avatarStyle = { backgroundColor: '#FF6F61' };
+  const btnStyle = { margin: '8px 0' };
+
   const submitHandler = (event) => {
-    event.preventDefault(); // Prevents page from refreshing
+    event.preventDefault();
     console.log(state);
     if (!state.username) alert('Please enter the Username');
     else if (!state.password) alert('Please enter the Password');
     else {
-      // Endpoint for login post request
       const url = 'api/user/login';
       const option = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(state), // stringified to JSON {username: , password: }
+        body: JSON.stringify(state),
       };
-      // Post request
       fetch(url, option)
         .then((response) => response.json())
         .then((data) => {
-          // On successful login, redirect to MainPage.jsx & inject state into the component
           if (data.success) {
+            console.log(data.data);
             navigate('/home', { state: data.data });
-          } 
-          // On unsuccessful login, alert user and reset password field
-          else {
+          } else {
             alert(data.message);
             setState({ ...state, password: '' });
           }
@@ -76,14 +55,9 @@ export default function Login() {
     }
   };
 
-  /**
-   * changeHandler - Updates state with the username and password as those fields are filled out
-   * @param {object} event 
-   */
   const changeHandler = (event) => {
     setState({ ...state, [event.target.name]: event.target.value });
   };
-
   return (
     <>
       <Grid>
@@ -131,7 +105,6 @@ export default function Login() {
             Sign In
           </Button>
           <Typography>
-            {/* nothing happening here with link, # is a default value */}
             <Link href='#'>Forgot Password?</Link>
           </Typography>
           <Typography>
