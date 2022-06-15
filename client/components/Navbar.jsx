@@ -1,4 +1,3 @@
-// TODO: Remove some of the boilerplate that serves no purpose
 import React from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import MuiAppBar from '@mui/material/AppBar';
@@ -18,7 +17,6 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import StorefrontIcon from '@mui/icons-material/Storefront';
 import cover from '../assets/vector/default-monochrome-white.svg';
 import TextField from '@mui/material/TextField';
-
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
