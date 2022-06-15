@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import Card from '@mui/material/Card';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import Chip from '@mui/material/Chip';
-import Stack from '@mui/material/Stack';
+import { Card, CardMedia, CardContent, Typography, Chip, Stack } from '@mui/material';
 
+/**
+ * ProductItem - Returns Card component which contains all card details
+ * @param {object} State
+ * @returns {component} Card component
+ */
 export default function ProductItem({
   name,
   price,
@@ -18,8 +18,6 @@ export default function ProductItem({
     setItem();
     handleOpen();
   };
-  console.log(handleOpen);
-  console.log(setItem);
 
   return (
     <Card onClick={handleClick} sx={{ maxWidth: 345, position: 'relative' }}>

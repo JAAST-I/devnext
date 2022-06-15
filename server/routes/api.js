@@ -42,7 +42,7 @@ router.post(
 );
 
 ///////////////////////////////////////////// Do these have to be in a different router? /////////////////////////////////////////////
-
+//router for api/user
 router.get('/', itemController.getAllItems, (req, res) => {
   res.status(200).json(res.locals.items);
 });

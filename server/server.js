@@ -38,6 +38,10 @@ app.get('/api', (req, res) => {
   res.status(200).json('Hello World from Server!');
 });
 
+// app.use('/', (req, res) => {
+//   res.redirect(200, 'http://localhost:8080/signup');
+// });
+
 app.use('*', (req, res) => {
   res.sendStatus(404);
 });

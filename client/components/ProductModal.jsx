@@ -1,18 +1,25 @@
 import React from 'react';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import { red } from '@mui/material/colors';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
-import '../styles/ProductModal.css';
+import { Stack, Button, Avatar, IconButton } from '@mui/material'
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+// import FavoriteIcon from '@mui/icons-material/Favorite';
+// import { red } from '@mui/material/colors';
+import '../styles/ProductModal.css';
 
+
+/**
+ * ProductModal - Returns popup containing product details (name, price, type)
+ * @param {object} State
+ * @returns {div}
+ */
 export default function ProductModal({ currentItemDetails, handleClose }) {
   const { name, price, url, details, type, _id, username } = currentItemDetails;
 
   const data = { itemId: _id };
 
+  /**
+   * handleClick - After user clicks on button to 'buy' product
+   * the user is redirected to checkout page
+   */
   function handleClick() {
     fetch('api/user/checkout', {
       method: 'POST',
@@ -45,7 +52,7 @@ export default function ProductModal({ currentItemDetails, handleClose }) {
         <div className='txt-container'>
           <h1>{name}</h1>
           <Avatar
-            alt='Howard Stark'
+            alt='Tony Stark'
             src='https://dailysuperheroes.com/wp-content/uploads/2020/02/tony-stark.jpg'
             sx={{ width: 56, height: 56 }}
           />

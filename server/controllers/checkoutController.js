@@ -1,3 +1,4 @@
+//Add documentation for stripe in this controller
 require('dotenv').config();
 // console.log(process.env.STRIPE_PRIVATE_KEY);
 const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
@@ -29,7 +30,7 @@ checkoutController.createCheckoutSession = async (req, res) => {
       cancel_url: 'http://localhost:8080/signup',
     });
     console.log(session.url);
-    res.json({ url: session.url });
+    res.json({ url: session.url }); // will give me a stripe checkout url page
   } catch (err) {
     // console.log(err);
     res.status(500).json({ error: err.message });

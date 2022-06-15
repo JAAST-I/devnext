@@ -1,3 +1,5 @@
+// TODO: Refactor the entire Controller to Async/Await
+
 const User = require('../models/userModels');
 const Item = require('../models/itemModels'); // used this in the getProdsAndFavs
 const userController = {};
@@ -56,6 +58,7 @@ userController.verifyUser = (req, res, next) => {
   const { username, password } = req.body;
 
   console.log(req.body);
+  // Use .findOne to return one unique entry -> Has implications for the handling of the returned object
   User.find({ username: username, password: password })
     .then((doc) => {
       // console.log('this is doc', doc);

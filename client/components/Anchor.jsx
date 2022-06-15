@@ -1,16 +1,24 @@
 import React, { useState } from 'react';
-import Box from '@mui/material/Box';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import Divider from '@mui/material/Divider';
-import HomeIcon from '@mui/icons-material/Home';
-import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
-import SettingsIcon from '@mui/icons-material/Settings';
-import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
+import {
+  Box,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Divider,
+} from '@mui/material';
+import {
+  Home as HomeIcon,
+  PeopleAlt as PeopleAltIcon,
+  Settings as SettingsIcon,
+  PowerSettingsNew as PowerSettingsNewIcon,
+} from '@mui/icons-material';
 
+/**
+ *@represents container for Home, Profile, Settings, Logout buttons in Drawer Component
+ *@returns {component} Anchor
+ */
 export default function Anchor({ setCurrent }) {
   return (
     <Box
@@ -20,14 +28,14 @@ export default function Anchor({ setCurrent }) {
         bgcolor: 'inherit',
       }}
     >
-      <nav aria-label='main navigation files'>
+      <nav aria-label="main navigation files">
         <List>
           <ListItem disablePadding>
             <ListItemButton onClick={() => setCurrent('home')}>
               <ListItemIcon>
                 <HomeIcon />
               </ListItemIcon>
-              <ListItemText primary='Home' />
+              <ListItemText primary="Home" />
             </ListItemButton>
           </ListItem>
 
@@ -36,7 +44,7 @@ export default function Anchor({ setCurrent }) {
               <ListItemIcon>
                 <PeopleAltIcon />
               </ListItemIcon>
-              <ListItemText primary='Profile' />
+              <ListItemText primary="Profile" />
             </ListItemButton>
           </ListItem>
 
@@ -45,13 +53,13 @@ export default function Anchor({ setCurrent }) {
               <ListItemIcon>
                 <SettingsIcon />
               </ListItemIcon>
-              <ListItemText primary='Settings' />
+              <ListItemText primary="Settings" />
             </ListItemButton>
           </ListItem>
         </List>
       </nav>
 
-      <nav aria-label='secondary markdown files'>
+      <nav aria-label="secondary markdown files">
         <Divider />
         <List>
           <ListItem disablePadding>
@@ -59,7 +67,7 @@ export default function Anchor({ setCurrent }) {
               <ListItemIcon>
                 <PowerSettingsNewIcon />
               </ListItemIcon>
-              <ListItemText primary='Log out' />
+              <ListItemText primary="Log out" />
             </ListItemButton>
           </ListItem>
         </List>

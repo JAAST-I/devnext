@@ -2,6 +2,11 @@ import React from 'react';
 import { Grid } from '@mui/material';
 import FavsItem from './FavsItem';
 
+/**
+ *@represents Entire container for each individual FavsItem
+ *@returns {component} Favs
+ */
+
 export default function Favs({ favs }) {
   return (
     <div style={{ height: '100vh', width: '100%', position: 'relative' }}>

@@ -1,3 +1,4 @@
+// TODO: Group imports based on source
 import Navbar from '../components/Navbar';
 import Anchor from '../components/Anchor';
 import Home from '../components/Home';
@@ -16,10 +17,12 @@ import Stack from '@mui/material/Stack';
 import Favs from '../components/Favs';
 import MOCK_DATA from '../../MOCK_DATA';
 
-import { useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom'; // Gets previous route
 
 const drawerWidth = 240;
 
+// This block is MUI boilerplate
+//***************************************** */
 const MainContainer = styled('main', {
   shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open }) => ({
@@ -38,7 +41,7 @@ const MainContainer = styled('main', {
     marginLeft: 0,
   }),
 }));
-
+// Component used in the return statement below
 const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
@@ -47,22 +50,24 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   ...theme.mixins.toolbar,
   justifyContent: 'space-between',
 }));
+//******************************************** */
 
 export default function MainPage() {
   const theme = useTheme();
-  const [open, setOpen] = useState(false);
+  // Is drawer open? -- Default to false
+  const [open, setOpen] = useState(false); // determines drawer to open or not
 
-  const [searchInput, setSearchInput] = useState('');
+  const [searchInput, setSearchInput] = useState(''); //search bar input
+  // item data is the result of fetching database items
+  const [itemData, setItemData] = useState([]); // all items displayed in main, potentially rename
 
-  const [itemData, setItemData] = useState([]);
-
-  const [current, setCurrent] = useState('home');
+  const [current, setCurrent] = useState('home'); // determines current area by endpoint
 
   const filteredItemData = itemData.filter(({ name }) =>
     name.toLowerCase().includes(searchInput.toLocaleLowerCase())
   );
-  //                                        coming from Login.jsx
-  const [userData, setUserData] = useState(useLocation().state.data);
+  //                              useLocation coming from Login.jsx
+  const [userData, setUserData] = useState(useLocation().state.data); // {username,pas,fav, products, _id} -- TODO: Potential for cleanup, shouldn't pass password
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -72,6 +77,7 @@ export default function MainPage() {
     setOpen(false);
   };
 
+  // TODO: Rename "reset" -- It gets user data, handleItemDataList
   const reset = () => {
     console.log('reseting!');
     fetch('/api/user')
@@ -83,15 +89,15 @@ export default function MainPage() {
   };
 
   useEffect(() => {
-    reset();
-  }, []);
+    reset(); // getting the item data
+  }, []); // component did mount (if we didn't init empty array, would be invoked every time there is a change to component)
 
   let currentElement;
-
+  // Sets currentElement to the component to be rendered depending of the value of the variable "current"
   if (current === 'home') {
     currentElement = (
       <Home
-        itemData={filteredItemData}
+        itemData={filteredItemData} // TODO: to be renamed / State itemData and props itemData are unrelated
         reset={reset}
         userId={userData._id}
         username={userData.username}
@@ -152,6 +158,7 @@ export default function MainPage() {
       </Drawer>
       <MainContainer open={open}>
         <DrawerHeader />
+        {/* Current element changes depending on the value of "current" -- Either render home, favs, or other | refer to line 91 */}
         {currentElement}
       </MainContainer>
     </Box>

@@ -2,12 +2,16 @@ import * as React from 'react';
 import ProductItem from './ProductItem';
 import Grid from '@mui/material/Grid';
 
+/**
+ * ProductContainer - Returns Grid component that contains ProductItems
+ * @param {object} State
+ * @returns {component} Grid component
+ */
 export default function ProductContainer({
   handleOpen,
   itemData,
   setCurrentItemDetails,
 }) {
-  console.log('FRom PC ', typeof setCurrentItemDetails);
   return (
     <Grid
       container
