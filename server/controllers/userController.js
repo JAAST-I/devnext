@@ -2,7 +2,6 @@
 
 const User = require('../models/userModels');
 const Item = require('../models/itemModels'); // used this in the getProdsAndFavs
-const { ClickAwayListener } = require('@mui/material');
 
 /**
  * @type {object}
@@ -141,35 +140,3 @@ module.exports = userController;
 
 //Stored, to be used later as development continues.
 // user.populate() add new instance of items in array    api/user/sell
-
-// userController.getProdsAndFavs = async (req, res, next) => {
-//   try {
-//     const { products, favs } = res.locals.data;
-//     const productItems = await products.map(async (id) => {
-//       try {
-//         const foundItem = await Item.findById(id);
-//         // console.log(foundItem);
-//         return foundItem;
-//       } catch (err) {
-//         return next(err);
-//       }
-//     });
-
-//     const favItems = await favs.map(async (id) => {
-//       try {
-//         const foundItem = await Item.findById(id);
-//         // console.log(foundItem);
-//         return foundItem;
-//       } catch (err) {
-//         return next(err);
-//       }
-//     });
-
-//     res.locals.productItems = productItems;
-//     res.locals.favItems = favItems;
-//     console.log(res.locals);
-//     return next();
-//   } catch (err) {
-//     return next(err);
-//   }
-// };
