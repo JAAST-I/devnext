@@ -31,7 +31,6 @@ export default function Home({ itemData, reset, userId, username }) {
           setCurrentItemDetails={setCurrentItemDetails}
           handleOpen={handleOpenItem}
           itemData={itemData}
-          username={username}
         />
       </div>
       <Fab // blue add button

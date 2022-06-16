@@ -63,7 +63,7 @@ itemController.findItem = async (req, res, next) => {
   try {
     const { itemId } = req.body;
     console.log(itemId);
-    await Item.findById(itemId).exec();
+    const foundItem = await Item.findById(itemId).exec();
     res.locals.foundItem = foundItem;
     next();
   } catch (err) {
