@@ -55,20 +55,60 @@ router.post(
   }
 );
 
+/**
+ * Route post request to /favs through userController.getProductsAndFavItems middleware. Adds res.locals to response object. 
+ */
 router.post('/favs',
-  userController.getProductsAndFavItems, //finditem for favs
+  userController.getProductsAndFavItems, 
   (req, res) => {
     res.status(200).json(res.locals);
   })
 
 /**
- * Route post request to /fave through userController.updateFavList middleware. Add res.locals to response object. (Potential for )
+ * Route patch request to /favs through userController.updateFavList middleware. Adds res.locals to response object. 
  */
 router.patch('/favs', 
   userController.updateFavList,
   (req, res) => {
     res.status(200).json(res.locals);
 });
+
+/**
+ * Route delete request to /favs through userController.deleteFavListItem middleware. Adds res.locals to response object. 
+ */
+router.delete('/favs', 
+  userController.deleteFavListItem,
+  (req, res) => {
+    res.status(200).json('Favorite item removed!');
+});
+
+/**
+ * Route post request to /favs through userController.getCart middleware. Adds res.locals to response object. 
+ */
+ router.post('/cart',
+ userController.getCart, 
+ (req, res) => {
+   res.status(200).json(res.locals);
+ })
+
+/**
+* Route patch request to /favs through userController.updateCartList middleware. Adds res.locals to response object. 
+*/
+router.patch('/cart', 
+ userController.updateCartList,
+ (req, res) => {
+   res.status(200).json(res.locals);
+});
+
+/**
+* Route delete request to /favs through userController.deleteCartListItem middleware. Adds res.locals to response object. 
+*/
+router.delete('/cart', 
+ userController.deleteCartListItem,
+ (req, res) => {
+   res.status(200).json('Cart item deleted!');
+});
+
 
 /**
  * Route post request to '/updateItem' through itemController.updateItem middleware.

@@ -4,7 +4,7 @@
   "description": "Marketplace for SWEs",
   "main": "server/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "cross-env NODE_ENV=test nodemon ./server/server.js",
     "dev": "concurrently \"cross-env NODE_ENV=development webpack-dev-server --open --hot --progress --color \" \"cross-env NODE_ENV=test nodemon ./server/server.js\"",
     "build": "cross-env NODE_ENV=production webpack build"
@@ -17,6 +17,10 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/swanhtethtetswan/devnext/issues"
+  },  
+  "jest": {
+    "preset" : "@shelf/jest-mongodb"
+    
   },
   "homepage": "https://github.com/swanhtethtetswan/devnext#readme",
   "dependencies": {
@@ -41,6 +45,7 @@
     "@babel/plugin-transform-runtime": "^7.18.2",
     "@babel/preset-env": "^7.18.2",
     "@babel/preset-react": "^7.17.12",
+    "@shelf/jest-mongodb": "^3.0.1",
     "babel-loader": "^8.2.5",
     "concurrently": "^7.2.1",
     "cross-env": "^7.0.3",
@@ -48,8 +53,10 @@
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.0",
     "image-webpack-loader": "^8.1.0",
+    "jest": "^28.1.1",
     "nodemon": "^2.0.16",
     "style-loader": "^3.3.1",
+    "supertest": "^6.2.3",
     "webpack": "^5.73.0",
     "webpack-cli": "^4.9.2",
     "webpack-dev-server": "^4.9.2",

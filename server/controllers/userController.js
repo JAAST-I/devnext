@@ -1,5 +1,3 @@
-// TODO: Refactor the entire Controller to Async/Await
-
 const User = require('../models/userModels');
 const Item = require('../models/itemModels'); // used this in the getProdsAndFavs
 
@@ -66,14 +64,12 @@ userController.createUser = async (req, res, next) => {
     return next();
   } catch {
     return next({
-      log: 'Error in getFavList method in userController!',
+      log: 'Error in getProductsAndFavItems method in userController!',
       status: 500,
       message: { err: JSON.stringify(error) },
     })
   }
 };
-//get productList in favs
-//findoneanddelete user's product list
 
 /**
  * @desc Obtain username and password from the request body, locate the appropriate user in the database, and then authenticate the submitted password against the password stored in the database.
@@ -134,6 +130,87 @@ userController.updateFavList = async (req, res, next) => {
     })
   }
 };
+
+/**
+ * @desc Finds a user and returns their cart list with each item's description
+ * @returns an object containing the products and favs properties
+ */
+ userController.getCart = async (req, res, next) => {
+  try {
+    const { userId } = req.body;
+    const user = await User.findOne({ id: userId }).exec();
+
+    const userCartList = user.cart.map(async (item) => await Item.findById(item)); 
+    const resolvedCartList = await Promise.all(userCartList);
+
+    res.locals = { cart: resolvedCartList };
+    return next();
+  } catch {
+    return next({
+      log: 'Error in getCart method in userController!',
+      status: 500,
+      message: { err: JSON.stringify(error) },
+    })
+  }
+};
+
+/**
+ * @desc Finds a user and updates their list of favorites with the item sent along in the body
+ * @returns an updated favorites list stored in res.locals to be destructured in the front-end response.
+ */
+ userController.updateCartList = async (req, res, next) => {
+  try {
+  const { itemId, userId } = req.body;
+  const updatedCartList = await User.updateOne({ id: userId }, { $push: { cart: itemId } }).exec();
+    res.locals = updatedCartList;
+    return next();
+  } catch {
+    return next({
+      log: 'Error in updateCartList method in userController!',
+      status: 500,
+      message: { err: JSON.stringify(error) },
+    })
+  }
+};
+
+/**
+ * @desc Finds a user and deletes an item from their cart with the item sent along in the body
+ * @returns nothing
+ */
+userController.deleteCartListItem = async (req, res, next) => {
+  try {
+    const { itemId, userId } = req.body;
+    await User.updateOne({ _id: userId }, { $pull: { 'cart': itemId } } ).exec();
+
+    return next();
+
+   } catch(error) {
+    return next({
+      log: 'Error in deleteCartListItem method in userController!',
+      status: 500,
+      message: { err: JSON.stringify(error) },
+    });
+  }
+}
+
+/**
+ * @desc Finds a user and deletes an item from their list of favorites with the item sent along in the body
+ * @returns nothing
+ */
+userController.deleteFavListItem = async (req, res, next) => {
+  try {
+    const { itemId, userId } = req.body;
+    await User.updateOne({ _id: userId }, { $pull: { 'favs': itemId } } ).exec();
+    return next();
+
+   } catch(error) {
+    return next({
+      log: 'Error in deleteCartListItem method in userController!',
+      status: 500,
+      message: { err: JSON.stringify(error) },
+    });
+  }
+}
 
 module.exports = userController;
 

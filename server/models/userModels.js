@@ -1,5 +1,3 @@
-// TODO: STRETCH Feature: add a cart array to each user
-
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -18,6 +16,12 @@ const userSchema = new Schema({
       ref: 'Items',
     },
   ],
+  cart: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Items',
+    },
+  ]
 });
 
 /**
